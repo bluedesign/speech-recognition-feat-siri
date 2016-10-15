@@ -1,8 +1,3 @@
----
-title: Speech Recognition
-description: Use Speech Recognition featuring Siri API.
----
-
 # cordova-plugin-speech-recognition-feat-siri
 
 This plugin provides access to Speech Recognition API.
