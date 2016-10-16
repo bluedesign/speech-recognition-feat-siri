@@ -1,14 +1,16 @@
 # cordova-plugin-speech-recognition-feat-siri
 
-This plugin provides access to Speech Recognition API.
+This plugin provides access to Speech Recognition API(Apple SFSpeechRecognizer).
+
+<a href="https://developer.apple.com/library/content/samplecode/SpeakToMe/Introduction/Intro.html">Build&amp;Runtime Requirements</a>
+
 It is not available until after the `deviceready` event.
 
 
 ## Installation
 
-```command&nbsp;line 
     cordova plugin add cordova-plugin-speech-recognition-feat-siri
-```
+
 
 ### iOS Quirks
 
@@ -24,7 +26,7 @@ Please in the set include the swift module at the time of release build generati
 
 Setting position: Xcode project > TARGETS > Build Setting > Linking > Runpath Search Paths > Release
 
-value: @executable_path/Frameworks
+Setting value: @executable_path/Frameworks
 
 
 ## Usage
@@ -37,9 +39,9 @@ value: @executable_path/Frameworks
 
 The tap of the toggle button on the UI indicates the start and stop of the speech recognition.
 
-```js    
-SpeechRecognition.recordButtonTapped([LimitationSeconds], onSuccess, onError)
-```
+   
+    SpeechRecognition.recordButtonTapped([LimitationSeconds], onSuccess, onError)
+
 
 - __LimitationSeconds__:  Limitation seconds of Speech Recognition . _(String)_
 
@@ -67,7 +69,7 @@ These error string is returned from the plug-in.
 
 
 #### Example
-```js
+
     function doSpeechRecognition() {
 	    if(SpeechRecognition) {
            SpeechRecognition.recordButtonTapped(
@@ -81,11 +83,11 @@ These error string is returned from the plug-in.
            )
         }
     };
-```
+
 
 ## Supported Platforms
 
-- iOS <a href="https://developer.apple.com/library/content/samplecode/SpeakToMe/Introduction/Intro.html">Build&amp;Runtime Requirements</a>
+- iOS 
 
 
 ## LICENSE ##
