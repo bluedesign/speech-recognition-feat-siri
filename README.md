@@ -51,18 +51,14 @@ The tap of the toggle button on the UI indicates the start and stop of the speec
 
 #### Return Value
 
-#####onSuccess(returnMessage) : 
-
-It returns the result of the analysis of speech recognition as a character.
-
-Important!
+#####on Success(returnMessage) : 
 
 It will be in the state of voice waiting at the first method call. But there is no return value from the method is at this time. Because the plug-in does not control the user interface, please implement the user interface of speech recognition state in the app side.
 
-In the second time of the method call, and returns the result of the speech recognition was analyzed by character type
+In the second time of the method call, and returns the result of the speech recognition was analyzed by character type.
 
 
-#####Error(errorMessage) : 
+#####on Error(errorMessage) : 
 
 These error string is returned from the plug-in.
 
@@ -112,6 +108,7 @@ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLI
 
 Sample code project: SpeakToMe: Using Speech Recognition with AVAudioEngine
 Version: 1.0 
+
 <a href='https://developer.apple.com/library/content/samplecode/SpeakToMe/Introduction/Intro.html' target='blank'>Guides and Sample Code</a>
 
 IMPORTANT:  This Apple software is supplied to you by Apple

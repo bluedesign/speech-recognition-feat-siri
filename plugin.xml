@@ -1,0 +1,29 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin
+  xmlns="http://apache.org/cordova/ns/plugins/1.0"
+  id="cordova-plugin-speech-recognition-feat-siri"
+  version="1.0.0">
+  <name>Speech Recognition feat. Siri</name>
+  <description>Cordova Plugin Speech Recognition feat. Siri</description>
+  <author>SOHKAKUDO Ltd.</author>
+  <license>MIT</license>
+  <keywords>cordova, speech-recognition, iOS, Siri API</keywords>
+  <repo></repo>
+  <issue></issue>
+
+  <js-module src="www/SpeechRecognition.js" name="SpeechRecognition">
+    <clobbers target="SpeechRecognition" />
+  </js-module>
+
+  <!-- ios -->
+  <platform name="ios">
+    <config-file target="config.xml" parent="/*">
+      <feature name="SpeechRecognition">
+        <param name="ios-package" value="CDVSpeechRecognition"/>
+        <param name="onload" value="true" />
+      </feature>
+    </config-file>
+    <source-file src="src/ios/CDVSpeechRecognition.swift" />
+    <source-file src="src/ios/CDVSpeechRecognitionViewController.swift" />
+  </platform>
+</plugin>
