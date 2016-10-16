@@ -18,7 +18,7 @@
     "ecosystem:cordova",
     "cordova-ios"
   ],
-  "author": "SOHKAKUDO Inc.",
+  "author": "SOHKAKUDO Ltd.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/bluedesign/speech-recognition-feat-siri/issues"
