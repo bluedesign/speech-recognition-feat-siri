@@ -9,16 +9,13 @@
 @objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate {
 
     private var srvc : CDVSpeechRecognitionViewController = CDVSpeechRecognitionViewController()
-    private var enabled: Bool = false
-    private var appView = UIWebView()
-    
+    private var enabled: Bool = false    
     private var thisCommand: CDVInvokedUrlCommand = CDVInvokedUrlCommand()
     
     override func pluginInitialize() {
         super.pluginInitialize()
         srvc = CDVSpeechRecognitionViewController()
         srvc.delegate = self
-        appView = super.webView as! UIWebView
     }
 
     /** SpeechRecognizer Start/Stop Handler. */
