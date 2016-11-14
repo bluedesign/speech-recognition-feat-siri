@@ -6,6 +6,17 @@ This plugin provides access to Speech Recognition API(Apple SFSpeechRecognizer).
 
 It is not available until after the `deviceready` event.
 
+This plugin does not provide a graphical user interface.
+We are not planning to provide it in the future.
+Because it is a plug-in of Apache Cordoba which is a hybrid application.
+We believe that our plugin should not restrict the design of your application.
+Please implement sophisticated GUI designed for application.
+
+We'll introduce an iOS application installed without modifying our plugin. 
+Please check it
+
+<a href='https://itunes.apple.com/jp/app/knot/id1138536144?mt=8' target='blank'>KNot(SOHKAKUDO Ltd.)</a>
+
 
 ## Installation
 
