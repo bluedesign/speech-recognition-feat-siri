@@ -6,7 +6,7 @@
  
    copyright (C) 2016 SOHKAKUDO Ltd. All Rights Reserved.
  */
-@objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate {
+@objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate, OnFinalDelegate {
 
     private var srvc : CDVSpeechRecognitionViewController = CDVSpeechRecognitionViewController()
     private var enabled: Bool = false    
@@ -45,10 +45,18 @@
     }
 
     /** SpeechRecognizer time up Handler. */
-    func timeOut() {
-        returnResult(statusIsOK: false, returnString: "timeOut")
+    func timeOut(ret: String) {
+        if(ret != "") {
+            returnResult(statusIsOK: true, returnString: ret)
+        } else {
+            returnResult(statusIsOK: false, returnString: "timeOut")
+        }
     }
     
+    func onFinal(ret: String) {
+        returnResult(statusIsOK: true, returnString: ret)
+    }
+
     /** returns the result to the calling app. */
     func returnResult(statusIsOK: Bool, returnString: String) -> Void {
         let sendStatus = statusIsOK ? CDVCommandStatus_OK : CDVCommandStatus_ERROR

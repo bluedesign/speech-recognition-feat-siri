@@ -1,6 +1,6 @@
 {
   "name": "cordova-plugin-speech-recognition-feat-siri",
-  "version": "1.0.1",
+  "version": "2.0.0",
   "description": "Cordova Plugin Speech Recognition feat. Siri",
   "cordova": {
     "id": "cordova-plugin-speech-recognition-feat-siri",
