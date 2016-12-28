@@ -77,10 +77,10 @@ There are three ways to obtain the result of speech recognition (2 and 3 are new
   3) At method call the second time, it returns of analyzing the result of speech recognition as a character type.
 
 
-2.After the sound input by the microphone, when a certain period of time elapses with no voice, the speech recognition is automatically ended and the text is returned to the caller.
+2. After the sound input by the microphone, when a certain period of time elapses with no voice, the speech recognition is automatically ended and the text is returned to the caller.
 
 
-3.When the upper limit of the speech recognition time(LimitationSeconds) specified by the method is exceeded, the speech recognition is automatically ended and the text is returned to the caller
+3. When the upper limit of the speech recognition time(LimitationSeconds) specified by the method is exceeded, the speech recognition is automatically ended and the text is returned to the caller
 
 
 
