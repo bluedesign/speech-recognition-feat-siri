@@ -67,20 +67,20 @@ The tap of the toggle button on the UI indicates the start and stop of the speec
 
 There are three ways to obtain the result of speech recognition (2 and 3 are new functions).
 
-*# Your application calls the plug-in method twice at the timing of start and end of speech recognition.
+1. Your application calls the plug-in method twice at the timing of start and end of speech recognition.
 
-*## The voice input between the first and the second call will be converted as into character type and will be returned to the caller.
+    1. The voice input between the first and the second call will be converted as into character type and will be returned to the caller.
 
-*## Therefore, at the time of the first method call, it is just waiting for voice input.<br />
+    2. Therefore, at the time of the first method call, it is just waiting for voice input.<br />
     Because the plug-in does not control the user interface, please implement the user interface of speech recognition state in the app side.
 
-*## At method call the second time, it returns of analyzing the result of speech recognition as a character type.
+    3. At method call the second time, it returns of analyzing the result of speech recognition as a character type.
 
 
-*# After the sound input by the microphone, when a certain period of time elapses with no voice, the speech recognition is automatically ended and the text is returned to the caller.
+2. After the sound input by the microphone, when a certain period of time elapses with no voice, the speech recognition is automatically ended and the text is returned to the caller.
 
 
-*# When the upper limit of the speech recognition time(LimitationSeconds) specified by the method is exceeded, the speech recognition is automatically ended and the text is returned to the caller
+3. When the upper limit of the speech recognition time(LimitationSeconds) specified by the method is exceeded, the speech recognition is automatically ended and the text is returned to the caller
 
 
 
