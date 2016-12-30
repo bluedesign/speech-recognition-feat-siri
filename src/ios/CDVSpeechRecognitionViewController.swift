@@ -121,8 +121,8 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
         try audioSession.setActive(true, with: .notifyOthersOnDeactivation)
         
         recognitionRequest = SFSpeechAudioBufferRecognitionRequest()
-        
-        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+
+        let inputNode = self.getInputNode()
         guard let recognitionRequest = recognitionRequest else { fatalError("Unable to created a SFSpeechAudioBufferRecognitionRequest object") }
         
         // Configure request so that results are returned before audio recording is finished
@@ -183,6 +183,8 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
             audioEngine.stop()
             recognitionRequest?.endAudio()
             ret = self.recognizedText
+            let inputNode = self.getInputNode()
+            inputNode.removeTap(onBus: 0)
             self.stopTimer()
         } else {
             self.recognizedText = ""
@@ -234,12 +236,17 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
             recognitionRequest?.endAudio()
             ret = self.recognizedText
         }
-        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        let inputNode = self.getInputNode()
         inputNode.removeTap(onBus: 0)
         self.recognitionRequest = nil
         self.recognitionTask = nil
         recognitionLimiter = nil
         noAudioDurationTimer = nil
         delegate?.timeOut(ret: ret)
+    }
+    
+    func getInputNode() -> AVAudioInputNode {
+        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        return inputNode
     }
 }
