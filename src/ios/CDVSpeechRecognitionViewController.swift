@@ -14,46 +14,46 @@ import UIKit
 import Speech
 
 protocol TimeOutDelegate {
-    func timeOut(ret: String)
+    func timeOut(_ ret: String)
 }
 
 protocol OnFinalDelegate {
-    func onFinal(ret: String)
+    func onFinal(_ ret: String)
 }
 
-public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecognizerDelegate, SFSpeechRecognitionTaskDelegate {
+open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecognizerDelegate, SFSpeechRecognitionTaskDelegate {
 
     // MARK: Properties
     
     /** [API Reference] https://developer.apple.com/reference/speech/sfspeechrecognizer
      The Locale setting is based on setting of iOS. 
      */
-    private let speechRecognizer = SFSpeechRecognizer()!
+    fileprivate let speechRecognizer = SFSpeechRecognizer()!
     
-    private var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
+    fileprivate var recognitionRequest: SFSpeechAudioBufferRecognitionRequest?
     
-    private var recognitionTask: SFSpeechRecognitionTask?
+    fileprivate var recognitionTask: SFSpeechRecognitionTask?
     
-    private let audioEngine = AVAudioEngine()
+    fileprivate let audioEngine = AVAudioEngine()
 
 
     /** Text returned from speech recognition API */
-    private var recognizedText = ""
+    fileprivate var recognizedText = ""
     
     /** Timer for Speech recognition time limit */
-    private var recognitionLimiter: Timer?
+    fileprivate var recognitionLimiter: Timer?
     
     /** Speech recognition time limit (maximum time 60 seconds is Apple's limit time) */
-    private var recognitionLimitSec: Int = 60
+    fileprivate var recognitionLimitSec: Int = 60
     
     /** Timer for judging the period of silence */
-    private var noAudioDurationTimer: Timer?
+    fileprivate var noAudioDurationTimer: Timer?
 
     /** Threshold for judging period of silence */
-    private var noAudioDurationLimitSec: Int = 2
+    fileprivate var noAudioDurationLimitSec: Int = 2
 
     /** Speech recognition API state */
-    private var status: String = ""
+    fileprivate var status: String = ""
     
     internal var delegate: TimeOutDelegate?
     
@@ -95,7 +95,7 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
      Set Recognition time limitation.
      - parameter v: Specifies the amount of time that the upper limit (in seconds)
      */
-    public func setRecognitionLimitSec(v : Int) -> Void {
+    open func setRecognitionLimitSec(_ v : Int) -> Void {
         self.recognitionLimitSec = v;
     }
 
@@ -103,11 +103,11 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
      Plugin Status.
      - return This Plugin's Status: true -> Plugin is Enable, false -> Plugin is Disabled.  
      */
-    public func isEnabled() -> Bool {
+    open func isEnabled() -> Bool {
         return self.status == "authorized"
     }
 
-    private func startRecording() throws {
+    fileprivate func startRecording() throws {
 
         // Cancel the previous task if it's running.
         if let recognitionTask = recognitionTask {
@@ -141,19 +141,19 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
     }
 
     // MARK: SFSpeechRecognizerDelegate
-    public func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {}
+    open func speechRecognizer(_ speechRecognizer: SFSpeechRecognizer, availabilityDidChange available: Bool) {}
 
     // Tells the delegate when the task first detects speech in the source audio.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649206-speechrecognitiondiddetectspeech
-    public func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {}
+    open func speechRecognitionDidDetectSpeech(_ task: SFSpeechRecognitionTask) {}
 
     // Tells the delegate that the task has been canceled.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649200-speechrecognitiontaskwascancelle
-    public func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {}
+    open func speechRecognitionTaskWasCancelled(_ task: SFSpeechRecognitionTask) {}
 
     // Tells the delegate that a hypothesized transcription is available.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649210-speechrecognitiontask
-    public func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
+    open func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didHypothesizeTranscription transcription: SFTranscription) {
         self.recognizedText = transcription.formattedString
         // Start judgment of silent time
         self.stopNoAudioDurationTimer()
@@ -162,22 +162,22 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
 
     // Tells the delegate when the task is no longer accepting new audio input, even if final processing is in progress.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649193-speechrecognitiontaskfinishedrea
-    public func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {}
+    open func speechRecognitionTaskFinishedReadingAudio(_ task: SFSpeechRecognitionTask) {}
 
     // Tells the delegate when the final utterance is recognized.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649214-speechrecognitiontask
-    public func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
+    open func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishRecognition recognitionResult: SFSpeechRecognitionResult) {
         self.recognizedText = recognitionResult.bestTranscription.formattedString
     }
 
     // Tells the delegate when the recognition of all requested utterances is finished.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649215-speechrecognitiontask
-    public func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
-        self.onFinalDelegate?.onFinal(ret: self.recognizedText)
+    open func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
+        self.onFinalDelegate?.onFinal(self.recognizedText)
     }
 
     // MARK: Interface Builder actions
-    public func recordButtonTapped() -> String {
+    open func recordButtonTapped() -> String {
         var ret = ""
         if audioEngine.isRunning {
             audioEngine.stop()
@@ -242,9 +242,9 @@ public class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecog
         self.recognitionTask = nil
         recognitionLimiter = nil
         noAudioDurationTimer = nil
-        delegate?.timeOut(ret: ret)
+        delegate?.timeOut(ret)
     }
-    
+
     func getInputNode() -> AVAudioInputNode {
         guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
         return inputNode

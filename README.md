@@ -117,6 +117,14 @@ These error string is returned from the plug-in.
 
 - iOS 
 
+## Development and verification environment
+
+1. Xcode : 8.2.1(8C1002, swift compiler uses the latest version included in Xcode)
+2. Node.js : v6.9.2
+3. npm : 4.0.5
+4. Apache Cordova : 6.4.0
+5. cordova ios : 4.3.1
+
 
 ## LICENSE ##
 
