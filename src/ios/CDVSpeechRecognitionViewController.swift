@@ -34,7 +34,7 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     
     fileprivate var recognitionTask: SFSpeechRecognitionTask?
     
-    fileprivate let audioEngine = AVAudioEngine()
+    var audioEngine = AVAudioEngine()
 
 
     /** Text returned from speech recognition API */
@@ -75,6 +75,10 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     }
 
     func setup() {
+        // @see https://github.com/bluedesign/speech-recognition-feat-siri/issues/7
+        audioEngine = AVAudioEngine()
+        try! AVAudioSession.sharedInstance().setActive(true, with: .notifyOthersOnDeactivation)
+
         SFSpeechRecognizer.requestAuthorization { authStatus in
             OperationQueue.main.addOperation {
                 switch authStatus {
