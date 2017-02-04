@@ -75,10 +75,8 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     }
 
     func setup() {
-        // @see https://github.com/bluedesign/speech-recognition-feat-siri/issues/7
         audioEngine = AVAudioEngine()
-        try! AVAudioSession.sharedInstance().setActive(true, with: .notifyOthersOnDeactivation)
-
+        self.initializeAVAudioSession()
         SFSpeechRecognizer.requestAuthorization { authStatus in
             OperationQueue.main.addOperation {
                 switch authStatus {
@@ -246,7 +244,19 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
         self.recognitionTask = nil
         recognitionLimiter = nil
         noAudioDurationTimer = nil
+        self.resetAVAudioSession()
         delegate?.timeOut(ret)
+    }
+
+    /** AVAudioSession initialize. */
+    func initializeAVAudioSession() {
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
+        try! AVAudioSession.sharedInstance().setActive(false)
+    }
+
+    /** AVAudioSession End processing. */
+    func resetAVAudioSession() {
+        try! AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryAmbient)
     }
 
     func getInputNode() -> AVAudioInputNode {
