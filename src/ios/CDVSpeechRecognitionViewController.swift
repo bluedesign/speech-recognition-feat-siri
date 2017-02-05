@@ -175,6 +175,7 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     // Tells the delegate when the recognition of all requested utterances is finished.
     // @see https://developer.apple.com/reference/speech/sfspeechrecognitiontaskdelegate/1649215-speechrecognitiontask
     open func speechRecognitionTask(_ task: SFSpeechRecognitionTask, didFinishSuccessfully successfully: Bool) {
+        self.stopNoAudioDurationTimer()
         self.onFinalDelegate?.onFinal(self.recognizedText)
     }
 
@@ -215,6 +216,7 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     }
 
     func startNoAudioDurationTimer() {
+        self.stopTimer()
         noAudioDurationTimer = Timer.scheduledTimer(
                                 timeInterval: TimeInterval(self.noAudioDurationLimitSec),
                                 target: self,
