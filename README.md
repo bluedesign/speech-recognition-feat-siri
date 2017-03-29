@@ -18,6 +18,16 @@ Please check it<br />
 
 <a href='https://itunes.apple.com/jp/app/knot/id1138536144?mt=8' target='blank'>KNot(SOHKAKUDO Ltd.)</a>
 
+## Development and verification environment
+
+1. Xcode : 8.3(8E162, swift compiler uses the latest version included in Xcode)
+2. swift : 3.1
+3. Node.js : v6.9.2
+4. npm : 4.0.5
+5. Apache Cordova : 6.5.0
+6. cordova ios : 4.3.1
+7. Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
+
 
 ## Installation
 
@@ -116,14 +126,6 @@ These error string is returned from the plug-in.
 ## Supported Platforms
 
 - iOS 
-
-## Development and verification environment
-
-1. Xcode : 8.2.1(8C1002, swift compiler uses the latest version included in Xcode)
-2. Node.js : v6.9.2
-3. npm : 4.0.5
-4. Apache Cordova : 6.4.0
-5. cordova ios : 4.3.1
 
 
 ## LICENSE ##
