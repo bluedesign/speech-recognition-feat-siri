@@ -11,8 +11,16 @@
 var exec = require('cordova/exec');
 
 var SpeechRecognition = {
-  recordButtonTapped: function(limitationSec, onSuccess, onFail) {
-    exec(onSuccess, onFail, 'SpeechRecognition', 'recordButtonTapped', [limitationSec]);
+  recordButtonTapped: function(limitationSec, locale, onSuccess, onFail) {
+    if(arguments.callee.length == arguments.length) {
+        limitationSec = limitationSec == null? "0" : limitationSec;
+        locale = locale == null? "no_locale" : locale;
+        exec(onSuccess, onFail, 'SpeechRecognition', 'recordButtonTapped', [limitationSec, locale]);
+    }else{
+        alert('[cordova-plugin-speech-recognition-feat-siri] wrong number of arguments (' +
+              arguments.length + ' for ' +
+              arguments.callee.length + ')');
+    }
   }
 };
 module.exports = SpeechRecognition

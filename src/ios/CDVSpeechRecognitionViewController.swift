@@ -55,6 +55,9 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     /** Speech recognition API state */
     fileprivate var status: String = ""
     
+    /** locale identifier */
+    fileprivate var localeIdentifier: String?
+
     internal var delegate: TimeOutDelegate?
     
     internal var onFinalDelegate: OnFinalDelegate?
@@ -130,8 +133,8 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
         // Configure request so that results are returned before audio recording is finished
         recognitionRequest.shouldReportPartialResults = true
 
-        // Speech recognition delegate registration
-        let recognizer = SFSpeechRecognizer()
+        let recognizer = SFSpeechRecognizer(locale: Locale(identifier: (self.localeIdentifier)!))
+
         recognizer?.recognitionTask(with: recognitionRequest, delegate: self)
 
         let recordingFormat = inputNode.outputFormat(forBus: 0)
@@ -179,9 +182,14 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
         self.onFinalDelegate?.onFinal(self.recognizedText)
     }
 
-    // MARK: Interface Builder actions
-    open func recordButtonTapped() -> String {
+    /**
+     speech recognition start/stop.
+     - parameter locale: Specify the locale of speech recognition (ex. "ja-JP", "en-US"...)
+     */
+    open func recordButtonTapped(_ locale: String) -> String {
         var ret = ""
+        self.localeIdentifier = locale
+
         if audioEngine.isRunning {
             audioEngine.stop()
             recognitionRequest?.endAudio()
@@ -195,6 +203,11 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
             self.startTimer()
             ret = "recognizeNow"
         }
+        return ret
+    }
+
+    open func supportedLocales() -> Set<Locale> {
+        let ret : Set = SFSpeechRecognizer.supportedLocales()
         return ret
     }
     

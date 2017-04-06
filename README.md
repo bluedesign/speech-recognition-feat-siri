@@ -7,48 +7,20 @@ This plugin provides access to Speech Recognition API(Apple SFSpeechRecognizer).
 It is not available until after the `deviceready` event.
 
 
-This plugin does not provide a graphical user interface.<br />
-We are not planning to provide it in the future.<br />
-Because it is a plug-in of Apache Cordoba which is a hybrid application.<br />
-We believe that our plugin should not restrict the design of your application.<br />
-Please implement sophisticated GUI designed for application.<br />
-<br />
-We'll introduce an iOS application installed without modifying our plugin.<br />
-Please check it<br />
+### New Features & Releases(v2.1.0)
 
-<a href='https://itunes.apple.com/jp/app/knot/id1138536144?mt=8' target='blank'>KNot(SOHKAKUDO Ltd.)</a>
+With the new version, you can perform speech recognition on the specified locale each time you call the method.
 
-## Development and verification environment
+|Plugin version|〜v2.0.5|v2.1.0|
+|:--|:--|:--|
+|Concept of locale application in this plug-in.|Always apply the system locale set by the device and execute speech recognition.|Speech recognition is executed with the locale specified by the method argument. <br />If you omit the locale (set the empty string ""), it defaults to the system locale set on the device.|
+|method arguments|recordButtonTapped(LimitationSeconds, onSuccess, onError)|recordButtonTapped(LimitationSeconds, <span style="font-weight:bold;color:#990000;text-decoration: underline;">locale</span>, onSuccess, onError)|
 
-1. Xcode : 8.3(8E162, swift compiler uses the latest version included in Xcode)
-2. swift : 3.1
-3. Node.js : v6.9.2
-4. npm : 4.0.5
-5. Apache Cordova : 6.5.0
-6. cordova ios : 4.3.1
-7. Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
 
 
 ## Installation
 
     cordova plugin add cordova-plugin-speech-recognition-feat-siri
-
-
-### iOS Quirks
-
-Since iOS 10 it's mandatory to add a `NSMicrophoneUsageDescription` and `NSSpeechRecognitionUsageDescription` in the info.plist.
-
-- `NSMicrophoneUsageDescription` describes the reason that the app accesses the user’s Microphone.
-- `NSSpeechRecognitionUsageDescription` Specifies the reason for your app to send user data to Apple’s speech recognition servers. 
-
-## Xcode Project Setting(in 2016, Xcode8)
-
-Please in the set include the swift module at the time of release build generation.
-
-
-Setting position: Xcode project > TARGETS > Build Setting > Linking > Runpath Search Paths > Release
-
-Setting value: @executable_path/Frameworks
 
 
 ## Usage
@@ -62,10 +34,78 @@ Setting value: @executable_path/Frameworks
 The tap of the toggle button on the UI indicates the start and stop of the speech recognition.
 
    
-    SpeechRecognition.recordButtonTapped([LimitationSeconds], onSuccess, onError)
+    SpeechRecognition.recordButtonTapped([LimitationSeconds], [locale], onSuccess, onError)
 
 
-- __LimitationSeconds__:  Limitation seconds of Speech Recognition . _(String)_
+- __LimitationSeconds__:  Limitation seconds of Speech Recognition. _(String)_
+
+- __locale__:  The locale specified when executing speech recognition. _(String)_
+
+
+    The locale that can be specified with this plugin (Only locale supported by Siri API (SFSpeechRecognizer) can be specified(as of April 2017).)
+	+ "th-TH"
+	+ "ca-ES"
+	+ "fr-BE"
+	+ "de-CH"
+	+ "sk-SK"
+	+ "en-ZA"
+	+ "es-CL"
+	+ "zh-CN"
+	+ "zh-TW"
+	+ "da-DK"
+	+ "el-GR"
+	+ "he-IL"
+	+ "pt-BR"
+	+ "en-AE"
+	+ "pt-PT"
+	+ "fr-CH"
+	+ "ro-RO"
+	+ "vi-VN"
+	+ "en-SA"
+	+ "pl-PL"
+	+ "es-US"
+	+ "en-SG"
+	+ "tr-TR"
+	+ "hr-HR"
+	+ "ko-KR"
+	+ "uk-UA"
+	+ "it-CH"
+	+ "ar-SA"
+	+ "id-ID"
+	+ "en-IN"
+	+ "es-ES"
+	+ "de-AT"
+	+ "en-IE"
+	+ "cs-CZ"
+	+ "es-CO"
+	+ "zh-HK"
+	+ "sv-SE"
+	+ "en-PH"
+	+ "en-ID"
+	+ "en-CA"
+	+ "nl-NL"
+	+ "yue-CN"
+	+ "en-NZ"
+	+ "en-GB"
+	+ "ja-JP"
+	+ "it-IT"
+	+ "ru-RU"
+	+ "en-US"
+	+ "ms-MY"
+	+ "es-MX"
+	+ "hu-HU"
+	+ "fr-CA"
+	+ "de-DE"
+	+ "fr-FR"
+	+ "fi-FI"
+	+ "nb-NO"
+	+ "nl-BE"
+	+ "en-AU"
+ 
+    "": defaults to the system locale set on the device.
+
+
+
 
 - __onSuccess__: Call back when the API call to the voice recognition was successful. _(Function)_
 
@@ -75,7 +115,7 @@ The tap of the toggle button on the UI indicates the start and stop of the speec
 
 #####on Success(returnMessage) : 
 
-There are three ways to obtain the result of speech recognition (2 and 3 are new functions).
+There are three ways to obtain the result of speech recognition.
 
 1. Your application calls the plug-in method twice at the timing of start and end of speech recognition.
 
@@ -100,18 +140,38 @@ These error string is returned from the plug-in.
 
 |return value(type: string)|description|
 |:--|:--|
-|"commandArgIsNotString"|Invalid argument. specify the character type in the argument "limitationSeconds".|
+|"commandArg(recognitionLimitSec)IsNotString"|Invalid argument. specify the character type in the argument "limitationSeconds".|
 |"recognitionLimitSecTypeInvalid"|Invalid argument. specify the character type that can be interpreted as a numerical value to the argument "limitationSeconds".|
+|"commandArg(locale)IsNotString"|Invalid argument. specify the character type in the argument "locale".|
+|"commandArg(localeIdentifier)Invalid"|Invalid argument. The locale is not supported by the Siri API (SFSpeechRecognizer).|
 |"timeOut"|Interrupted the speech recognition. Because it exceeds the upper limit(argument "limitationSeconds") of the specified time.|
 |"pluginIsDisabled"|Plug-ins can not be used for any reason.|
 
 
-#### Example
+#### Example-1
 
     function doSpeechRecognition() {
 	    if(SpeechRecognition) {
            SpeechRecognition.recordButtonTapped(
                '15',  // ex. 15 seconds limitation for Speech
+               'ja-JP', // ex. locale: japanese, Japan
+               function(returnMessage){
+                   console.log(returnMessage); // onSuccess
+               },
+               function(errorMessage) {
+                   console.log(errorMessage); // onError
+               }
+           )
+        }
+    };
+    
+#### Example-2(use system locale.)
+
+    function doSpeechRecognition() {
+	    if(SpeechRecognition) {
+           SpeechRecognition.recordButtonTapped(
+               '15',  // ex. 15 seconds limitation for Speech
+               '', // defaults to the system locale set on the device.
                function(returnMessage){
                    console.log(returnMessage); // onSuccess
                },
@@ -122,10 +182,51 @@ These error string is returned from the plug-in.
         }
     };
 
+### iOS Quirks
+
+Since iOS 10 it's mandatory to add a `NSMicrophoneUsageDescription` and `NSSpeechRecognitionUsageDescription` in the info.plist.
+
+- `NSMicrophoneUsageDescription` describes the reason that the app accesses the user’s Microphone.
+- `NSSpeechRecognitionUsageDescription` Specifies the reason for your app to send user data to Apple’s speech recognition servers. 
+
+## Xcode Project Setting(in 2016, Xcode8)
+
+Please in the set include the swift module at the time of release build generation.
+
+
+Setting position: Xcode project > TARGETS > Build Setting > Linking > Runpath Search Paths > Release
+
+Setting value: @executable_path/Frameworks
+
+
 
 ## Supported Platforms
 
-- iOS 
+- iOS(version 10.0 or Higher)
+
+## About this plugin's user interface
+
+This plugin does not provide a graphical user interface.<br />
+We are not planning to provide it in the future.<br />
+Because it is a plug-in of Apache Cordoba which is a hybrid application.<br />
+We believe that our plugin should not restrict the design of your application.<br />
+Please implement sophisticated GUI designed for application.<br />
+<br />
+We'll introduce an iOS application installed without modifying our plugin.<br />
+Please check it<br />
+
+<a href='https://itunes.apple.com/jp/app/knot/id1138536144?mt=8' target='blank'>KNot(SOHKAKUDO Ltd.)</a>
+
+
+## Development and verification environment
+
+1. Xcode : 8.3(8E162, swift compiler uses the latest version included in Xcode)
+2. swift : 3.1
+3. Node.js : v6.9.2
+4. npm : 4.0.5
+5. Apache Cordova : 6.5.0
+6. cordova ios : 4.3.1
+7. Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
 
 
 ## LICENSE ##
