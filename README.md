@@ -7,14 +7,13 @@ This plugin provides access to Speech Recognition API(Apple SFSpeechRecognizer).
 It is not available until after the `deviceready` event.
 
 
-### New Features & Releases(v2.1.0)
+### New Releases(v2.1.1)
 
-With the new version, you can perform speech recognition on the specified locale each time you call the method.
+Review the naming convention to avoid conflicts with other plugins with the same global variable.
 
-|Plugin version|〜v2.0.5|v2.1.0|
+|Plugin version|〜v2.1.0|v2.1.1|
 |:--|:--|:--|
-|Concept of locale application in this plug-in.|Always apply the system locale set by the device and execute speech recognition.|Speech recognition is executed with the locale specified by the method argument. <br />If you omit the locale (set the empty string ""), it defaults to the system locale set on the device.|
-|method arguments|recordButtonTapped(LimitationSeconds, onSuccess, onError)|recordButtonTapped(LimitationSeconds, <span style="font-weight:bold;color:#990000;text-decoration: underline;">locale</span>, onSuccess, onError)|
+|method|SpeechRecognition.recordButtonTapped(LimitationSeconds, locale, onSuccess, onError)|SpeechRecognition<span style="font-weight:bold;color:#990000;">FeatSiri</span>.recordButtonTapped(LimitationSeconds, locale, onSuccess, onError)|
 
 
 
@@ -27,14 +26,14 @@ With the new version, you can perform speech recognition on the specified locale
 
 ### Methods
 
-- `SpeechRecognition.recordButtonTapped`
+- `SpeechRecognitionFeatSiri.recordButtonTapped`
 
-#### SpeechRecognition.recordButtonTapped
+#### SpeechRecognitionFeatSiri.recordButtonTapped
 
 The tap of the toggle button on the UI indicates the start and stop of the speech recognition.
 
    
-    SpeechRecognition.recordButtonTapped([LimitationSeconds], [locale], onSuccess, onError)
+    SpeechRecognitionFeatSiri.recordButtonTapped([LimitationSeconds], [locale], onSuccess, onError)
 
 
 - __LimitationSeconds__:  Limitation seconds of Speech Recognition. _(String)_
@@ -151,8 +150,8 @@ These error string is returned from the plug-in.
 #### Example-1
 
     function doSpeechRecognition() {
-	    if(SpeechRecognition) {
-           SpeechRecognition.recordButtonTapped(
+	    if(SpeechRecognitionFeatSiri) {
+           SpeechRecognitionFeatSiri.recordButtonTapped(
                '15',  // ex. 15 seconds limitation for Speech
                'ja-JP', // ex. locale: japanese, Japan
                function(returnMessage){
@@ -168,8 +167,8 @@ These error string is returned from the plug-in.
 #### Example-2(use system locale.)
 
     function doSpeechRecognition() {
-	    if(SpeechRecognition) {
-           SpeechRecognition.recordButtonTapped(
+	    if(SpeechRecognitionFeatSiri) {
+           SpeechRecognitionFeatSiri.recordButtonTapped(
                '15',  // ex. 15 seconds limitation for Speech
                '', // defaults to the system locale set on the device.
                function(returnMessage){

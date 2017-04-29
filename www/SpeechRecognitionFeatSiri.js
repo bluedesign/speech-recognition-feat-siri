@@ -10,12 +10,12 @@
 
 var exec = require('cordova/exec');
 
-var SpeechRecognition = {
+var SpeechRecognitionFeatSiri = {
   recordButtonTapped: function(limitationSec, locale, onSuccess, onFail) {
     if(arguments.callee.length == arguments.length) {
         limitationSec = limitationSec == null? "0" : limitationSec;
         locale = locale == null? "no_locale" : locale;
-        exec(onSuccess, onFail, 'SpeechRecognition', 'recordButtonTapped', [limitationSec, locale]);
+        exec(onSuccess, onFail, 'SpeechRecognitionFeatSiri', 'recordButtonTapped', [limitationSec, locale]);
     }else{
         alert('[cordova-plugin-speech-recognition-feat-siri] wrong number of arguments (' +
               arguments.length + ' for ' +
@@ -23,4 +23,4 @@ var SpeechRecognition = {
     }
   }
 };
-module.exports = SpeechRecognition
+module.exports = SpeechRecognitionFeatSiri
