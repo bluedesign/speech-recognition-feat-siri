@@ -219,13 +219,13 @@ Please check it<br />
 
 ## Development and verification environment
 
-Xcode : 8.3(8E162, swift compiler uses the latest version included in Xcode)
-swift : 3.1
-Node.js : v7.5.0
-npm : 5.3.0
-Apache Cordova : 7.0.1
-cordova ios : 4.4.0
-Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
+1.Xcode : 8.3(8E162, swift compiler uses the latest version included in Xcode)
+2.swift : 3.1
+3.Node.js : v7.5.0
+4.npm : 5.3.0
+5.Apache Cordova : 7.0.1
+6.cordova ios : 4.4.0
+7.Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
 
 
 ## LICENSE ##
