@@ -17,12 +17,22 @@
 
   <!-- ios -->
   <platform name="ios">
+    <preference name="SPEECH_USAGE_DESCRIPTION" default="Speech recognition permission is required" />
+    <preference name="MICROPHONE_USAGE_DESCRIPTION" default="Microphone permission is required for speech recognition" />
     <config-file target="config.xml" parent="/*">
       <feature name="SpeechRecognitionFeatSiri">
         <param name="ios-package" value="CDVSpeechRecognition"/>
         <param name="onload" value="true" />
       </feature>
     </config-file>
+    
+    <config-file target="*-Info.plist" parent="NSSpeechRecognitionUsageDescription">
+        <string>$SPEECH_USAGE_DESCRIPTION</string>
+    </config-file>
+    <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
+        <string>$MICROPHONE_USAGE_DESCRIPTION</string>
+    </config-file>
+
     <source-file src="src/ios/CDVSpeechRecognition.swift" />
     <source-file src="src/ios/CDVSpeechRecognitionViewController.swift" />
   </platform>
