@@ -86,6 +86,6 @@
      - return systen locale identifer (ex. "ja-JP", "en-US"...)
     */
     func currentLocaleIdentifer() -> String {
-        return NSLocale.current.identifier.replacingOccurrences(of: "_", with: "-")
+        return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
     }
 }
