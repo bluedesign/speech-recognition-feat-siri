@@ -10,7 +10,10 @@
   <keywords>cordova, speech-recognition, iOS, Siri API</keywords>
   <repo></repo>
   <issue></issue>
-
+  
+  <engines>
+      <engine name="cordova" version=">=3.4.0" />
+  </engines>
   <js-module src="www/SpeechRecognitionFeatSiri.js" name="SpeechRecognitionFeatSiri">
     <clobbers target="SpeechRecognitionFeatSiri" />
   </js-module>
