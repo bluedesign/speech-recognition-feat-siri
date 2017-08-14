@@ -21,6 +21,7 @@ protocol OnFinalDelegate {
     func onFinal(_ ret: String)
 }
 
+@available(iOS 10.0, *)
 open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecognizerDelegate, SFSpeechRecognitionTaskDelegate {
 
     // MARK: Properties
