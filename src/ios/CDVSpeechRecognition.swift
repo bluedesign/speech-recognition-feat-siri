@@ -6,6 +6,7 @@
  
    copyright (C) 2016 - 2017 SOHKAKUDO Ltd. All Rights Reserved.
  */
+@available(iOS 10.0, *)
 @objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate, OnFinalDelegate {
 
     fileprivate var srvc : CDVSpeechRecognitionViewController = CDVSpeechRecognitionViewController()
