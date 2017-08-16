@@ -81,20 +81,6 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     func setup() {
         audioEngine = AVAudioEngine()
         self.initializeAVAudioSession()
-        SFSpeechRecognizer.requestAuthorization { authStatus in
-            OperationQueue.main.addOperation {
-                switch authStatus {
-                    case .authorized:
-                        self.status = "authorized"
-                    case .denied:
-                        self.status = "denied"
-                    case .restricted:
-                        self.status = "restricted"
-                    case .notDetermined:
-                        self.status = "notDetermined"
-                }
-            }
-        }
     }
     
     /**
@@ -110,6 +96,22 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
      - return This Plugin's Status: true -> Plugin is Enable, false -> Plugin is Disabled.  
      */
     open func isEnabled() -> Bool {
+        if (self.status != "authorized") {
+            SFSpeechRecognizer.requestAuthorization { authStatus in
+                OperationQueue.main.addOperation {
+                    switch authStatus {
+                        case .authorized:
+                            self.status = "authorized"
+                        case .denied:
+                            self.status = "denied"
+                        case .restricted:
+                            self.status = "restricted"
+                        case .notDetermined:
+                            self.status = "notDetermined"
+                    }
+                }
+            }            
+        }
         return self.status == "authorized"
     }
 
