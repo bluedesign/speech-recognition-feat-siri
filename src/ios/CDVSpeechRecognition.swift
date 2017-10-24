@@ -6,6 +6,7 @@
  
    copyright (C) 2016 - 2017 SOHKAKUDO Ltd. All Rights Reserved.
  */
+@available(iOS 10.0, *)
 @objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate, OnFinalDelegate {
 
     fileprivate var srvc : CDVSpeechRecognitionViewController = CDVSpeechRecognitionViewController()
@@ -85,6 +86,6 @@
      - return systen locale identifer (ex. "ja-JP", "en-US"...)
     */
     func currentLocaleIdentifer() -> String {
-        return NSLocale.current.identifier.replacingOccurrences(of: "_", with: "-")
+        return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
     }
 }
