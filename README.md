@@ -6,17 +6,6 @@ This plugin provides access to Speech Recognition API(Apple SFSpeechRecognizer).
 
 It is not available until after the `deviceready` event.
 
-
-### New Releases(v2.1.1)
-
-Review the naming convention to avoid conflicts with other plugins with the same global variable.
-
-|Plugin version|〜v2.1.0|v2.1.1|
-|:--|:--|:--|
-|method|SpeechRecognition.recordButtonTapped(LimitationSeconds, locale, onSuccess, onError)|SpeechRecognition<span style="font-weight:bold;color:#990000;">FeatSiri</span>.recordButtonTapped(LimitationSeconds, locale, onSuccess, onError)|
-
-
-
 ## Installation
 
     cordova plugin add cordova-plugin-speech-recognition-feat-siri
@@ -210,11 +199,6 @@ We are not planning to provide it in the future.<br />
 Because it is a plug-in of Apache Cordoba which is a hybrid application.<br />
 We believe that our plugin should not restrict the design of your application.<br />
 Please implement sophisticated GUI designed for application.<br />
-<br />
-We'll introduce an iOS application installed without modifying our plugin.<br />
-Please check it<br />
-
-<a href='https://itunes.apple.com/jp/app/knot/id1138536144?mt=8' target='blank'>KNot(SOHKAKUDO Ltd.)</a>
 
 
 ## Development and verification environment
