@@ -3,7 +3,7 @@
     Cordova Plugin Speech Recognition feat. Siri API
     https://github.com/bluedesign/speech-recognition-feat-siri
 
-    by SOHKAKUDO Ltd.
+    by Masakatsu Aoyama.
     MIT License
 
 */

@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2016 - 2017 SOHKAKUDO Ltd. All Rights Reserved.
+    Copyright (C) 2016 - 2017 Masakatsu Aoyama. All Rights Reserved.
     See LICENSE.txt for this Plugin’s licensing information
 */
 /*

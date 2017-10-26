@@ -4,7 +4,7 @@
 
    Target OS Version : iOS(ver 10.0 or Higher)
  
-   copyright (C) 2016 - 2017 SOHKAKUDO Ltd. All Rights Reserved.
+   copyright (C) 2016 - 2017 Masakatsu Aoyama. All Rights Reserved.
  */
 @available(iOS 10.0, *)
 @objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate, OnFinalDelegate {

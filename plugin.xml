@@ -5,7 +5,7 @@
   version="2.1.2">
   <name>Speech Recognition feat. Siri</name>
   <description>Cordova Plugin Speech Recognition feat. Siri</description>
-  <author>SOHKAKUDO Ltd.</author>
+  <author>Masakatsu Aoyama</author>
   <license>MIT</license>
   <keywords>cordova, speech-recognition, iOS, Siri API</keywords>
   <repo></repo>
