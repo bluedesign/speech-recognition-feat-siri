@@ -203,17 +203,17 @@ Please implement sophisticated GUI designed for application.<br />
 
 ## Development and verification environment
 
-1. Xcode : 8.3(8E162, swift compiler uses the latest version included in Xcode)
+1. Xcode : 9.2(9C40b, swift compiler uses the latest version included in Xcode)
 
-2. swift : 3.1
+2. swift : 4.0
 
-3. Node.js : v7.5.0
+3. Node.js : v6.9.2
 
 4. npm : 5.3.0
 
-5. Apache Cordova : 7.0.1
+5. Apache Cordova : 8.0.0
 
-6. cordova ios : 4.4.0
+6. cordova ios : 4.5.4
 
 7. Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
 

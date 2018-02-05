@@ -2,7 +2,7 @@
 <plugin
   xmlns="http://apache.org/cordova/ns/plugins/1.0"
   id="cordova-plugin-speech-recognition-feat-siri"
-  version="2.1.3">
+  version="2.2.0">
   <name>Speech Recognition feat. Siri</name>
   <description>Cordova Plugin Speech Recognition feat. Siri</description>
   <author>Masakatsu Aoyama</author>

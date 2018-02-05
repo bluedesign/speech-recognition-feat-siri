@@ -1,5 +1,5 @@
 /*
-    Copyright (C) 2016 - 2017 Masakatsu Aoyama. All Rights Reserved.
+    Copyright (C) 2016 - 2018 Masakatsu Aoyama(bluedesign). All Rights Reserved.
     See LICENSE.txt for this Plugin’s licensing information
 */
 /*
@@ -249,7 +249,7 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
         }
     }
 
-    func InterruptEvent() {
+    @objc func InterruptEvent() {
         var ret = ""
         if audioEngine.isRunning {
             audioEngine.stop()
@@ -278,7 +278,7 @@ open class CDVSpeechRecognitionViewController: UIViewController, SFSpeechRecogni
     }
 
     func getInputNode() -> AVAudioInputNode {
-        guard let inputNode = audioEngine.inputNode else { fatalError("Audio engine has no input node") }
+        guard let inputNode = audioEngine.inputNode as Optional else { fatalError("Audio engine has no input node") }
         return inputNode
     }
 }
