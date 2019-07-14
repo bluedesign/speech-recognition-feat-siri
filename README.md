@@ -136,7 +136,7 @@ These error string is returned from the plug-in.
 |"pluginIsDisabled"|Plug-ins can not be used for any reason.|
 
 
-#### Example-1
+#### Example1
 
     function doSpeechRecognition() {
 	    if(SpeechRecognitionFeatSiri) {
@@ -153,7 +153,7 @@ These error string is returned from the plug-in.
         }
     };
     
-#### Example-2(use system locale.)
+#### Example2(use system locale.)
 
     function doSpeechRecognition() {
 	    if(SpeechRecognitionFeatSiri) {
