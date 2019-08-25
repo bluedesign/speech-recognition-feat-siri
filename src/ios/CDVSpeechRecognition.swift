@@ -1,19 +1,22 @@
 /**
  # Cordova Plugin Speech Recognition for iOS.
-   Add the voice recognition function to the application using the Siri API.
-
-   Target OS Version : iOS(ver 10.0 or Higher)
+ Add the voice recognition function to the application using the Siri API.
  
-   Copyright (C) 2016 - 2018 Masakatsu Aoyama(bluedesign). All Rights Reserved.
-
+ Target OS Version : iOS(ver 10.0 or Higher)
+ 
+ Copyright (C) 2016 Masakatsu Aoyama(bluedesign). All Rights Reserved.
+ 
  */
-@available(iOS 10.0, *)
-@objc(CDVSpeechRecognition) class SpeechRecognition : CDVPlugin, TimeOutDelegate, OnFinalDelegate {
 
+@available(iOS 10.0, *)
+@objcMembers
+class SpeechRecognitionFeatSiri : CDVPlugin, TimeOutDelegate, OnFinalDelegate {
+    
     fileprivate var srvc : CDVSpeechRecognitionViewController = CDVSpeechRecognitionViewController()
-    fileprivate var enabled: Bool = false    
+    fileprivate var enabled: Bool = false
     fileprivate var thisCommand: CDVInvokedUrlCommand = CDVInvokedUrlCommand()
     fileprivate var supportedLocaleIdentifiers = Set<String>()
+    /** Speech recognition API state */
     
     override func pluginInitialize() {
         super.pluginInitialize()
@@ -23,8 +26,9 @@
         srvc.supportedLocales().enumerated().forEach {
             supportedLocaleIdentifiers.insert($0.element.identifier)
         }
+        srvc.isEnabled() /** Workaround to initialize plugin before first method call */
     }
-
+    
     /** SpeechRecognizer Start/Stop Handler. */
     func recordButtonTapped(_ command: CDVInvokedUrlCommand) {
         thisCommand = command
@@ -35,24 +39,25 @@
                 return
             }
             if let second = NumberFormatter().number(from: recognitionLimitSec as! String){
-                srvc.setRecognitionLimitSec(Int(second))
+                srvc.setRecognitionLimitSec(Int(truncating: second))
             } else {
                 returnResult(false, returnString: "recognitionLimitSecTypeInvalid")
                 return
             }
-
+            
             let locale: Any = command.argument(at: 1) as! String
             if(locale is String == false) {
                 returnResult(false, returnString: "commandArg(locale)IsNotString")
                 return
             }
+
             var targetLocale: String = locale as! String
             targetLocale = targetLocale.isEmpty ? self.currentLocaleIdentifer() : targetLocale
             if !supportedLocaleIdentifiers.contains(targetLocale) {
                 returnResult(false, returnString: "commandArg(localeIdentifier)Invalid")
                 return
             }
-             
+            
             let returnString: String = srvc.recordButtonTapped(targetLocale)
             if(returnString != "recognizeNow") {
                 returnResult(true, returnString: returnString)
@@ -61,7 +66,7 @@
             returnResult(false, returnString: "pluginIsDisabled")
         }
     }
-
+    
     /** SpeechRecognizer time up Handler. */
     func timeOut(_ ret: String) {
         if(ret != "") {
@@ -74,19 +79,19 @@
     func onFinal(_ ret: String) {
         returnResult(true, returnString: ret)
     }
-
+    
     /** returns the result to the calling app. */
     func returnResult(_ statusIsOK: Bool, returnString: String) -> Void {
         let sendStatus = statusIsOK ? CDVCommandStatus_OK : CDVCommandStatus_ERROR
         let result = CDVPluginResult(status: sendStatus, messageAs: returnString)
         commandDelegate.send(result, callbackId:thisCommand.callbackId)
     }
-
+    
     /**
      get system locale identifer.
      - return systen locale identifer (ex. "ja-JP", "en-US"...)
-    */
+     */
     func currentLocaleIdentifer() -> String {
-        return Locale.current.identifier.replacingOccurrences(of: "_", with: "-")
+        return Locale.preferredLanguages.first!
     }
 }

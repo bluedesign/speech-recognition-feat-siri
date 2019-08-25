@@ -30,68 +30,8 @@ The tap of the toggle button on the UI indicates the start and stop of the speec
 - __locale__:  The locale specified when executing speech recognition. _(String)_
 
 
-    The locale that can be specified with this plugin (Only locale supported by Siri API (SFSpeechRecognizer) can be specified(as of April 2017).)
-	+ "th-TH"
-	+ "ca-ES"
-	+ "fr-BE"
-	+ "de-CH"
-	+ "sk-SK"
-	+ "en-ZA"
-	+ "es-CL"
-	+ "zh-CN"
-	+ "zh-TW"
-	+ "da-DK"
-	+ "el-GR"
-	+ "he-IL"
-	+ "pt-BR"
-	+ "en-AE"
-	+ "pt-PT"
-	+ "fr-CH"
-	+ "ro-RO"
-	+ "vi-VN"
-	+ "en-SA"
-	+ "pl-PL"
-	+ "es-US"
-	+ "en-SG"
-	+ "tr-TR"
-	+ "hr-HR"
-	+ "ko-KR"
-	+ "uk-UA"
-	+ "it-CH"
-	+ "ar-SA"
-	+ "id-ID"
-	+ "en-IN"
-	+ "es-ES"
-	+ "de-AT"
-	+ "en-IE"
-	+ "cs-CZ"
-	+ "es-CO"
-	+ "zh-HK"
-	+ "sv-SE"
-	+ "en-PH"
-	+ "en-ID"
-	+ "en-CA"
-	+ "nl-NL"
-	+ "yue-CN"
-	+ "en-NZ"
-	+ "en-GB"
-	+ "ja-JP"
-	+ "it-IT"
-	+ "ru-RU"
-	+ "en-US"
-	+ "ms-MY"
-	+ "es-MX"
-	+ "hu-HU"
-	+ "fr-CA"
-	+ "de-DE"
-	+ "fr-FR"
-	+ "fi-FI"
-	+ "nb-NO"
-	+ "nl-BE"
-	+ "en-AU"
- 
+    The locale that can be specified with this plugin (Only locale supported by Siri API (SFSpeechRecognizer) can be specified(as of April 2017).) 
     "": defaults to the system locale set on the device.
-
 
 
 
@@ -170,24 +110,6 @@ These error string is returned from the plug-in.
         }
     };
 
-### iOS Quirks
-
-Since iOS 10 it's mandatory to add a `NSMicrophoneUsageDescription` and `NSSpeechRecognitionUsageDescription` in the info.plist.
-
-- `NSMicrophoneUsageDescription` describes the reason that the app accesses the user’s Microphone.
-- `NSSpeechRecognitionUsageDescription` Specifies the reason for your app to send user data to Apple’s speech recognition servers. 
-
-## Xcode Project Setting(in 2016, Xcode8)
-
-Please in the set include the swift module at the time of release build generation.
-
-
-Setting position: Xcode project > TARGETS > Build Setting > Linking > Runpath Search Paths > Release
-
-Setting value: @executable_path/Frameworks
-
-
-
 ## Supported Platforms
 
 - iOS(version 10.0 or Higher)
@@ -203,24 +125,24 @@ Please implement sophisticated GUI designed for application.<br />
 
 ## Development and verification environment
 
-1. Xcode : 9.2(9C40b, swift compiler uses the latest version included in Xcode)
+1. Xcode : 10.2.1(10E1001, swift compiler uses the latest version included in Xcode)
 
-2. swift : 4.0
+2. swift : 5.0
 
-3. Node.js : v6.9.2
+3. Node.js : v10.15.0
 
-4. npm : 5.3.0
+4. npm : 6.5.0
 
-5. Apache Cordova : 8.0.0
+5. Apache Cordova : 9.0.0(cordova-lib@9.0.1)
 
-6. cordova ios : 4.5.4
+6. cordova ios : 5.0.1
 
-7. Devices used for verification and iOS version : iPhone7 Plus, iOS10.3
+7. Devices used for verification : iPhone7 Plus, iPadPro 11inch
 
 
 ## LICENSE ##
 
-Copyright (c) 2016-2018 Masakatsu Aoyama.
+Copyright (c) 2016 Masakatsu Aoyama.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 
