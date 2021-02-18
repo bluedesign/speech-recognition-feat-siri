@@ -125,7 +125,7 @@ Please implement sophisticated GUI designed for application.<br />
 
 ## Development and verification environment
 
-1. Xcode : 10.2.1(10E1001, swift compiler uses the latest version included in Xcode)
+1. Xcode : 12.4
 
 2. swift : 5.0
 
@@ -133,9 +133,9 @@ Please implement sophisticated GUI designed for application.<br />
 
 4. npm : 6.5.0
 
-5. Apache Cordova : 9.0.0(cordova-lib@9.0.1)
+5. Apache Cordova : 10.0.0
 
-6. cordova ios : 5.0.1
+6. cordova ios : 6.2.0
 
 7. Devices used for verification : iPhone7 Plus, iPadPro 11inch
 
